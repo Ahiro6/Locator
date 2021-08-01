@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div>
+        {{ text | safe }}
+    </div>
+    <form method="POST", action="/">
+        <input type="emial" required name="email" placeholder="E-mail">
+        <input required name="place" placeholder="Destination">
+        <button>Submit</button>
+    </form>
+
+
+{% endblock %}

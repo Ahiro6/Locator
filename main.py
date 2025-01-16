@@ -10,8 +10,8 @@ geo = GeoCode()
 map = Mapping()
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://postgres:adi0103@localhost/YourMaps'
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://suscxlapqrexdd:6abf1e14173029f66aa4f794dc2c2b81284a110125a73a73d8651514bac36961@ec2-3-226-134-153.compute-1.amazonaws.com:5432/d5pi6d3pfdj29v=require'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://postgres:adi0103@localhost/Locator'
+# app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://suscxlapqrexdd:6abf1e14173029f66aa4f794dc2c2b81284a110125a73a73d8651514bac36961@ec2-3-226-134-153.compute-1.amazonaws.com:5432/d5pi6d3pfdj29v=require'
 db = SQLAlchemy(app)
 
 class Data(db.Model):
@@ -28,11 +28,18 @@ class Data(db.Model):
         self.lon_ = lon_
         self.place_ = place_
 
+with app.app_context():
+    db.create_all()
+
 
 def insert(email, lat, lon, place):
-        data = Data(email, lat, lon, place)
-        db.session.add(data)
-        db.session.commit()
+        try:
+            data = Data(email, lat, lon, place)
+            db.session.add(data)
+            db.session.commit()
+            return "Success! You will have your email shortly."  
+        except:
+            return "Email has already been used..."
 
 
 @app.route("/")
@@ -49,10 +56,9 @@ def home_post():
 
         if db.session.query(Data).filter(Data.email_==email).count() == 0:
             geo.locate(place)
-            insert(email, geo.location.latitude, geo.location.longitude, place)
+            msg = insert(email, geo.location.latitude, geo.location.longitude, place)
             map.createMarker(geo, place)
-            emailaccess.send_email(email, geo.location.longitude, geo.location.latitude, db.session.query(Data.place_).scalar(), db.session.query(Data.place_).filter(Data.place_ == place).count())
-            msg = "Success! You will have your email shortly."  
+            # emailaccess.send_email(email, geo.location.longitude, geo.location.latitude, db.session.query(Data.place_).scalar(), db.session.query(Data.place_).filter(Data.place_ == place).count())
 
         else:
             msg = "This email is already taken..."

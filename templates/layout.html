@@ -4,11 +4,17 @@
         <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}">
     </head>
     <body>
-        {% block body %}
-        {% endblock %}
+        <div>
+            <h1 class="title">Locator</h1>
+        </div>
+        
+        <div class="main">
+            {% block body %}
+            {% endblock %}
 
-        <div class="map">
-            {% include "partials/Map.html" %}
+            <div class="map">
+                {% include "partials/Map.html" %}
+            </div>
         </div>
     </body>
 </html>

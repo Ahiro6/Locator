@@ -2,12 +2,14 @@ from email.mime.text import MIMEText
 import aiosmtpd
 import smtplib
 
+import os
+
 class EmailAccess: 
     def __init__(self):
         self.subject = "Locator: YourMaps"
 
-        self.from_email = "hiro6hamada6+locator@gmail.com"
-        self.from_password = "Elvis#2006"
+        self.from_email = os.getenv('EMAIL')
+        self.from_password = os.getenv('PASSWORD')
 
     def send_email(self, email, lon, lat, place, data):
         self.email = email

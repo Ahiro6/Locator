@@ -1,18 +1,25 @@
 {% extends "layout.html" %}
 {% block body %}
-
 <div>
-    <p>
-        {{ text | safe }}
-    </p>
-</div>
-<div>
-    <form method="POST" , action="/">
-        <input type="email" required name="email" placeholder="E-mail">
-        <input required name="place" placeholder="Destination">
-        <button>Submit</button>
-    </form>
+    <div class="info">
+        <p>
+            {{ text | safe }}
+        </p>
+        <p>
+            Become part of the this map! By entering your email and your favourite location.
+            <br />
+            Your location will be plotted on the map!
+            <br />
+            You will also receive a an emial with the coordinates...
+        </p>
+    </div>
+    <div class="map-form">
+        <form method="POST" , action="/">
+            <input type="email" required name="email" placeholder="E-mail">
+            <input required name="place" placeholder="Destination">
+            <button>Submit</button>
+        </form>
 
+    </div>
 </div>
-
 {% endblock %}

@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from geocode import GeoCode
 from flask import Flask, render_template, request, redirect
 from map import Mapping

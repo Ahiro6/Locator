@@ -1,6 +1,55 @@
 .map {
-    width: 100%;
+    width: 70%;
     height: 100%;
     display: flex;
-    padding: 10% 25%;
+    padding: 5% 5%;
+}
+
+.map-form {
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+}
+
+.map-form form input {
+    border: 3px solid rgb(156, 162, 156);
+    padding: 1em;
+    border-radius: 2em;
+}
+
+.map-form form button {
+    border: 3px solid rgb(6, 212, 89);
+    background-color: rgb(9, 171, 9);
+    padding: 1em;
+    border-radius: 2em;
+    color: white;
+}
+
+.title {
+    margin: 0;
+    background-color: rgb(3, 122, 60);
+    color: rgb(225, 225, 237);
+    padding: 1em;
+    text-align: center;
+}
+
+.main {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    background-color: rgb(168, 225, 151);
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info p {
+    text-align: center;
+    margin: 2em;
 }
